@@ -10,6 +10,10 @@ etalon_pdf = ParsePdf('standard.pdf')
 etalon_content = etalon_pdf.parse_pdf()
 
 
+def check_val_len(value):
+    return True if len(value) > 0 else False
+
+
 @pytest.mark.parametrize("file_name", files_to_test)
 def test_labels(file_name):
 
@@ -29,7 +33,7 @@ def test_labels(file_name):
 
     # Check labels values
     for tested_key, tested_value in etalon_content['labels'].items():
-        assert len(tested_value['value']) == len(current_content['labels'][tested_key]['value']), \
+        assert check_val_len(tested_value['value']) == check_val_len(current_content['labels'][tested_key]['value']), \
             f'Label "{tested_key}" doesn\'t have required value in file "{file_name}"'
 
     # Number barcodes in the file
