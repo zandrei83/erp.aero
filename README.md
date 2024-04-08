@@ -1,2 +1,2 @@
 Run tests:
-pytest -v -s
+pytest -v
